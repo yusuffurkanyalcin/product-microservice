@@ -1,13 +1,13 @@
 package com.example.inventory_service.controller;
 
+import com.example.inventory_service.dto.InventoryResponse;
 import com.example.inventory_service.service.InventoryServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/v1/inventories")
+@RequestMapping("/v1/inventory")
 public class InventoryController {
 
     private final InventoryServiceImpl inventoryService;
@@ -16,8 +16,9 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    @GetMapping("/{sku-code}")
-    public boolean isInStock(@PathVariable("sku-code") String skuCode) {
+    // https://localhost:80802/v1/inventory?skuCode=asus-1-laptop
+    @GetMapping
+    public List<InventoryResponse> isInStock(@RequestParam("skuCode") List<String> skuCode) {
         return inventoryService.isInStock(skuCode);
     }
 }
