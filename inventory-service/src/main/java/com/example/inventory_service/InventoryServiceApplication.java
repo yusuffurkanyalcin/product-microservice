@@ -18,7 +18,7 @@ public class InventoryServiceApplication {
 	public CommandLineRunner loadData(InventoryRepository inventoryRepository) {
 		return args -> {
 			Inventory inventory = new Inventory();
-			inventory.setSkuCode("laptop");
+			inventory.setSkuCode("iphone 13");
 			inventory.setQuantity(100);
 
 			inventoryRepository.save(inventory);

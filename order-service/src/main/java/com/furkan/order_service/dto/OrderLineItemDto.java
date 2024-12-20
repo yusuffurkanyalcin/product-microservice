@@ -6,6 +6,7 @@ public class OrderLineItemDto {
     private Long id;
     private String skuCode;
     private BigDecimal price;
+    private Integer quantity;
 
     public Long getId() {
         return id;
@@ -38,6 +39,4 @@ public class OrderLineItemDto {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
-    private Integer quantity;
 }
