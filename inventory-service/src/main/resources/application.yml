@@ -15,3 +15,12 @@ spring:
     show-sql: 'true'
     hibernate:
       ddl-auto: update
+
+  eureka:
+    client:
+      fetch-registery: true
+      register-with-eureka: true
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+    instance:
+      prefer-ip-address: true
