@@ -1,0 +1,48 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: gateway
+
+  eureka:
+    client:
+      fetch-registery: true
+      register-with-eureka: true
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+    instance:
+      prefer-ip-address: true
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      httpclient:
+        connect-timeout: 2000
+        response-timeout: 10s
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/v1/products
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/v1/orders
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/v1/inventory
+        - id: eureka-server
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/web/**
+          filters:
+            - SetPath=/
+        - id: eureka-server-static
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/**
